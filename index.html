@@ -102,7 +102,6 @@
           <stop offset="100%" stop-color="#26a69a"/>
         </linearGradient>
       </defs>
-      
       <!-- Abstract blooming flower petals -->
       <circle cx="32" cy="32" r="8" class="grad-fill" />
       <path class="grad-stroke" d="M32 8l8 16-8 16-8-16 8-16z" />
@@ -111,14 +110,40 @@
       <path class="grad-stroke" d="M16 24l8 16-8 16-8-16 8-16z" transform="rotate(180 32 32)"/>
       <path class="grad-stroke" d="M16 24l8 16-8 16-8-16 8-16z" transform="rotate(240 32 32)"/>
       <path class="grad-stroke" d="M16 24l8 16-8 16-8-16 8-16z" transform="rotate(300 32 32)"/>
-      
       <!-- Sparkle star top right -->
       <polygon class="sparkle" points="50,10 52,14 56,14 53,17 54,21 50,19 46,21 47,17 44,14 48,14" />
     </svg>
+    <!-- Download Button Added Below -->
+    <button id="download-btn" style="margin-top: 24px; padding: 10px 24px; background: linear-gradient(90deg, #664296, #8e24aa); color: #fff; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; font-family: 'Montserrat', sans-serif;">
+      Download Logo (SVG)
+    </button>
     <h1 class="brand-name">Dermatique</h1>
     <div class="tagline">Aesthetics</div>
     <div class="slogan">Radiate Confidence, Naturally</div>
   </div>
+  <!-- Download Script Added Below -->
+  <script>
+    document.getElementById('download-btn').addEventListener('click', function () {
+      const svg = document.querySelector('.logo-icon');
+      const serializer = new XMLSerializer();
+      let source = serializer.serializeToString(svg);
+
+      // Ensure the SVG has the correct namespace
+      if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+      }
+
+      // Add xml declaration
+      source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+      const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "dermatique-logo.svg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
 </body>
 </html>
-
